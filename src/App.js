@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 function App () {
   
-  const [value, setValue] = useState(1)
+  const [value, setValue] = useState(0)
 
  
   function addOne(){
@@ -12,8 +12,7 @@ function App () {
     setValue(value + 1)
   }
   return <div>
-        <h1>Hello World {value}</h1>
-        <button onClick={addOne}>Add 1</button>
+        <button onClick={addOne}>Like {value}</button>
     </div>
 }
 

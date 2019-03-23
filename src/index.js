@@ -4,16 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const e = React.createElement
-
-const containers = document.querySelectorAll('.cfe-app')
-
-containers.forEach(domContainer=>{
-    const url = domContainer.dataset.url
-    const reactApp = e(App, domContainer.dataset)
-    ReactDOM.render(reactApp, domContainer)
-})
-
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

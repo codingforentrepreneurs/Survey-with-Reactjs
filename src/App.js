@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 
-function App () {
+function App (props) {
   
   const [value, setValue] = useState(0)
-
+  console.log(props)
  
   function addOne(){
     console.log('working...')

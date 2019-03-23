@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const e = React.createElement
 
 const containers = document.querySelectorAll('.cfe-app')
 
 containers.forEach(domContainer=>{
-    ReactDOM.render(<App/>, domContainer)
+    const url = domContainer.dataset.url
+    const reactApp = e(App, domContainer.dataset)
+    ReactDOM.render(reactApp, domContainer)
 })
 
 

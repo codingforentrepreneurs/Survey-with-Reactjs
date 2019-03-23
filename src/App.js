@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 
 function LikeBtn (props) {
   const [value, setValue] = useState(0)
+  console.log(props)
   function addOne(){
     setValue(value + 1)
   }
@@ -15,7 +16,7 @@ function App (props) {
     
 
     return <div>
-      <LikeBtn />
+      <LikeBtn url='https://cfe.sh'></LikeBtn>
 
       <LikeBtn />
 

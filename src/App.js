@@ -5,11 +5,14 @@ import React, {useState} from 'react';
 function LikeBtn (props) {
   const [value, setValue] = useState(0)
   const defaultVerb = props.verb ? props.verb : "Like"
-  let verb = props.children ? props.children : defaultVerb
+  const initialVerb = props.children ? props.children : defaultVerb
+  const [verb, setVerb] = useState(initialVerb)
+  
   // condition statemet ? true : false
   function addOne(){
+    console.log(props)
     setValue(value + 1)
-    verb = 'Clicked'
+    setVerb('Clicked')
   }
   return <button onClick={addOne}>{verb} {value}</button>
 }

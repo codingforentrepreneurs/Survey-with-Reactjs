@@ -5,10 +5,11 @@ import React, {useState} from 'react';
 function LikeBtn (props) {
   const [value, setValue] = useState(0)
   console.log(props)
+  const verb = props.children
   function addOne(){
     setValue(value + 1)
   }
-  return <button onClick={addOne}>Like {value}</button>
+  return <button onClick={addOne}>{verb} {value}</button>
 }
 
 
@@ -16,7 +17,9 @@ function App (props) {
     
 
     return <div>
-      <LikeBtn url='https://cfe.sh'></LikeBtn>
+      <LikeBtn url='https://cfe.sh'>
+        Love
+      </LikeBtn>
 
       <LikeBtn />
 

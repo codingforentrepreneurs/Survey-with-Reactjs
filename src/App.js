@@ -4,12 +4,12 @@ import React, {useState} from 'react';
 
 function LikeBtn (props) {
   const [value, setValue] = useState(0)
-  console.log(props)
   const defaultVerb = props.verb ? props.verb : "Like"
-  const verb = props.children ? props.children : defaultVerb
+  let verb = props.children ? props.children : defaultVerb
   // condition statemet ? true : false
   function addOne(){
     setValue(value + 1)
+    verb = 'Clicked'
   }
   return <button onClick={addOne}>{verb} {value}</button>
 }

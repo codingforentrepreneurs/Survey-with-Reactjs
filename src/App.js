@@ -1,6 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import logo from './logo.svg';
 // import './App.css';
+
+function Clock (props) {
+  const [date, setDate] = useState(new Date())
+
+  useEffect(()=>{
+      let timerID = setInterval(() => {
+        refreshClock()
+      }, 1000)
+
+      return () => {
+        clearInterval(timerID)
+      }
+  })
+
+  function refreshClock () {
+    setDate(new Date())
+  }
+  return <div>
+    The time is {date.toLocaleTimeString()}
+  </div>
+}
 
 function LikeBtn (props) {
   const [value, setValue] = useState(0)
@@ -22,6 +43,9 @@ function App (props) {
     
 
     return <div>
+
+      <Clock />
+
       <LikeBtn url='https://cfe.sh'>
         Love
       </LikeBtn>

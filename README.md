@@ -23,3 +23,15 @@ React v16.8 with Hooks :)
 
 [11 - Props Basics](../../tree/69a65aca25fc1977698f893547ffb7dca864a33f/)
 
+[12 - Props Children](../../tree/db313133adc3cadc67ff3ca8ce783ae38058480d/)
+
+[13 - Rendering Conditional Values](../../tree/ee905152ff1e471f244433dac3d53ab71b1cea23/)
+
+[14 - More on Props](../../tree/388cc2baa369605e9a1c450ffa064db0d7e876b8/)
+
+[15 - Set Initial State with Props](../../tree/04b7b55fb2f86b54232db803649a14e1cac82901/)
+
+[16 - React useEffect Hook](../../tree/5136c2b679b5953a7e731e900ce67e3283dfde66/)
+
+[17 - Lifecycle Methods in a React Class Component](../../tree/2cf48e5f230015ea078446a23233aa0f39131855/)
+

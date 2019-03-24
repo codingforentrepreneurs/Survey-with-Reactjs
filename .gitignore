@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-parse_git_log.py
+parse.py
 # dependencies
 /node_modules
 /.pnp

@@ -13,9 +13,12 @@ class ClockClass extends React.Component {
     }
 
     componentDidMount() {
+      this.setState({
+        date: this.props.current ? this.props.current : new Date()
+      })
       this.timerID = setInterval(() => {
         this.tick()
-      }, 100)
+      }, this.props.timer ? this.props.timer : 1000)
       console.log('componentDidMount')
     }
 
@@ -41,13 +44,13 @@ class ClockClass extends React.Component {
 
 
 function Clock (props) {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(props.current ? props.current : new Date())
 
   useEffect(()=>{
     // subscribe to event
       let timerID = setInterval(() => {
         refreshClock()
-      }, 1000)
+      }, props.timer ? props.timer : 1000)
 
       return () => {
          // unsubscribe to event
@@ -81,12 +84,13 @@ function LikeBtn (props) {
 
 function App (props) {
     
-
+    const nowDate = new Date()
+    const tickTime = 1000
     return <div>
 
-      <ClockClass />
+      <ClockClass current={nowDate} timer={tickTime} />
 
-      <Clock />
+      <Clock current={nowDate} timer={tickTime} />
 
       <LikeBtn url='https://cfe.sh'>
         Love

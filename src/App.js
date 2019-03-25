@@ -1,11 +1,29 @@
 import React, {useState} from 'react'
 
+
+function verifyInputType (inputType) {
+    let type = 'text'
+    switch (inputType) {
+        case 'email':
+            type = 'email'
+            break
+        case 'number':
+            type = 'number'
+            break
+        default:
+            type = 'text'
+    }
+    return type
+}
+
+
 const SurveyInput = props => {
     const [name, setName] = useState('')
-    const [inputType, setType] = useState(props.type ? props.type : 'text')
     const handleChange = event => {
         setName(event.target.value)
     }
+
+    const inputType = verifyInputType(props.type)
 
     return  <input 
         onChange={handleChange}

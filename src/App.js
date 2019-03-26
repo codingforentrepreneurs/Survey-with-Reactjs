@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 
-function verifyInputType (inputType) {
+function verifyTextInputType (inputType) {
     let type = 'text'
     switch (inputType) {
         case 'email':
@@ -35,9 +35,16 @@ const useInputChange = (customValue, callback) => {
 }
 
 
-const SurveyInput = props => {
+const SurveyRadioInput = props => {
+
+    return <div>
+        
+    </div>
+}
+
+const SurveyTextInput = props => {
     const {value, handleChange} = useInputChange(props.defaultValue, props.triggerCallback)
-    const inputType = verifyInputType(props.type)
+    const inputType = verifyTextInputType(props.type)
     const inputProps = {
         className: 'form-control',
         onChange: handleChange,
@@ -47,14 +54,8 @@ const SurveyInput = props => {
         name: props.name ? props.name : `${inputType}_${props.key}`
     }
     return inputType === 'textarea' ? 
-
-        <textarea  
-            {...inputProps}
-        /> :
-
-     <input 
-        {...inputProps}
-        />
+    <textarea {...inputProps} /> :
+     <input {...inputProps} />
 }
 
 
@@ -73,6 +74,24 @@ const myInputs = [
         name: 'message',
         type: 'textarea',
         placeholder: "Your Message"
+    },
+    {
+        name: 'mySingleChoice',
+        type: 'radio',
+        options: [
+            {
+                value: 1,
+                label: 'Label 1'
+            },
+            {
+                value: 'abc',
+                label: 'Label abc'
+            },
+            {
+                value: '123',
+                label: 'Label 123'
+            }
+        ]
     }
 
 ]
@@ -108,7 +127,13 @@ const App = props => {
             {myInputs.map((obj, index)=>{
 
 
-                return <SurveyInput 
+                return obj.type === 'radio' ?
+                    <SurveyRadioInput object={obj} key={`input-${index}`} />
+
+                    :
+
+
+                     <SurveyTextInput 
                     type={obj.type}
                     triggerCallback={callback}
                     placeholder={obj.placeholder}

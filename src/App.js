@@ -2,21 +2,18 @@ import React, {useState} from 'react'
 
 
 function verifyTextInputType (inputType) {
-    let type = 'text'
     switch (inputType) {
+        case 'text':
+            return true
         case 'email':
-            type = 'email'
-            break
+            return true
         case 'number':
-            type = 'number'
-            break
+            return true
         case 'textarea':
-            type = 'textarea'
-            break
+            return true
         default:
-            type = 'text'
+            return false
     }
-    return type
 }
 
 const useInputChange = (customValue, callback) => {
@@ -64,7 +61,7 @@ const SurveyRadioInput = props => {
 
 const SurveyTextInput = props => {
     const {value, handleChange} = useInputChange(props.defaultValue, props.triggerCallback)
-    const inputType = verifyTextInputType(props.type)
+    const inputType = verifyTextInputType(props.type) ? props.type : 'text'
     const inputProps = {
         className: props.className ? props.className : 'form-control',
         onChange: handleChange,
@@ -118,28 +115,30 @@ const myInputs = [
 
 
 const App = props => {
-    const [inlineData, setInlineData] = useState({})
+
     const handleSubmit = (event) => {
         event.preventDefault()
         event.persist()
-        
-        console.log(inlineData)
         // XMLHttpRequest()
         let formData = new FormData()
         for (let formInput of event.target.elements){
-            if (formInput.name !== 'save_btn') {
+            
+
+            const verifyType = verifyTextInputType(formInput.type)
+            if (verifyType) {
                 console.log(formInput.name, formInput.value)
                 formData.append(formInput.name, formInput.value)
-            }   
+            }
+
+            if (formInput.checked) {
+                console.log(formInput.name, formInput.value)
+                formData.append(formInput.name, formInput.value)
+            }
+
+
         }
     }
 
-    const callback = (name, value) => {
-        console.log('callback', name, value)
-        inlineData[name] = value
-        setInlineData(inlineData)
-        
-    }
     return <div className='col-6 mx-auto text-center'>
         <h1>Hello There</h1>
         
@@ -158,7 +157,6 @@ const App = props => {
                      <SurveyTextInput 
                      className='mb-3 form-control'
                     type={obj.type}
-                    triggerCallback={callback}
                     placeholder={obj.placeholder}
                     defaultValue={obj.defaultValue} 
                     name={obj.name}

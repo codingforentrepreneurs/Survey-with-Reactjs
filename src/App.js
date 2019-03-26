@@ -75,22 +75,44 @@ const myInputs = [
 
 
 const App = props => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        event.persist()
+        
+
+        // XMLHttpRequest()
+        let formData = new FormData()
+        for (let formInput of event.target.elements){
+            if (formInput.name !== 'save_btn') {
+                console.log(formInput.name, formInput.value)
+                formData.append(formInput.name, formInput.value)
+            }   
+        }
+    }
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
         
+        <form onSubmit={handleSubmit}>
+            {myInputs.map((obj, index)=>{
 
-        {myInputs.map((obj, index)=>{
 
+                return <SurveyInput 
+                    type={obj.type}
+                    placeholder={obj.placeholder}
+                    defaultValue={obj.defaultValue} 
+                    name={obj.name}
+                    key={`input-${index}`}
+                     />
+                   
 
-            return <SurveyInput 
-                type={obj.type}
-                placeholder={obj.placeholder}
-                defaultValue={obj.defaultValue} 
-                name={obj.name} />
+                })
 
-            })
-
-        }
+            }
+            <button 
+                    name='save_btn'
+                    type='input' 
+                    className='btn btn-primary my-5'>Save</button>
+        </form>
         
     </div>
 }

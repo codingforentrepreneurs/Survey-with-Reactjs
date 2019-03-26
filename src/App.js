@@ -19,18 +19,25 @@ function verifyInputType (inputType) {
     return type
 }
 
+const useInputChange = customValue => {
+    const [value, setValue] = useState(customValue ? customValue : '')
+    const handleChange = event => {
+        setValue(event.target.value)
+    }
+    return {
+        value: value,
+        handleChange: handleChange
+    }
+}
+
 
 const SurveyInput = props => {
-    const [name, setName] = useState('')
-    const handleChange = event => {
-        setName(event.target.value)
-    }
-
+    const {value, handleChange} = useInputChange(props.defaultValue)
     const inputType = verifyInputType(props.type)
     const inputProps = {
         className: 'form-control',
         onChange: handleChange,
-        value: name,
+        value: value,
         type: inputType,
         placeholder: props.placeholder ? props.placeholder : 'Your text...',
         name: props.name ? props.name : `${inputType}_${props.key}`
@@ -51,7 +58,7 @@ const SurveyInput = props => {
 const App = props => {
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
-        <SurveyInput placeholder='My Placeholder' name='first_name' />
+        <SurveyInput placeholder='My Placeholder' name='first_name' defaultValue='Justin' />
 
 
         <SurveyInput type='textarea' placeholder='My Placeholder' name='first_name'  />

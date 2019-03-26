@@ -54,19 +54,44 @@ const SurveyInput = props => {
 }
 
 
+const myInputs = [
+    {
+        name: 'full_name',
+        type: 'text',
+        placeholder: "You full name..."
+    },
+    {
+        name: 'email',
+        type: 'email',
+        placeholder: "hello@teamcfe.com"
+    },
+    {
+        name: 'message',
+        type: 'textarea',
+        placeholder: "Your Message"
+    }
+
+]
+
 
 const App = props => {
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
-        <SurveyInput placeholder='My Placeholder' name='first_name' defaultValue='Justin' />
+        
+
+        {myInputs.map((obj, index)=>{
 
 
-        <SurveyInput type='textarea' placeholder='My Placeholder' name='first_name'  />
+            return <SurveyInput 
+                type={obj.type}
+                placeholder={obj.placeholder}
+                defaultValue={obj.defaultValue} 
+                name={obj.name} />
 
-        <SurveyInput type='number' placeholder='My Placeholder' name='first_name'  />
+            })
 
-
-        <SurveyInput type='email' placeholder='My Placeholder' name='first_name'  />
+        }
+        
     </div>
 }
 

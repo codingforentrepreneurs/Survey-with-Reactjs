@@ -10,6 +10,9 @@ function verifyInputType (inputType) {
         case 'number':
             type = 'number'
             break
+        case 'textarea':
+            type = 'textarea'
+            break
         default:
             type = 'text'
     }
@@ -24,8 +27,20 @@ const SurveyInput = props => {
     }
 
     const inputType = verifyInputType(props.type)
+    
+    return inputType === 'textarea' ? 
 
-    return  <input 
+        <textarea  
+            className='form-control'
+            onChange={handleChange}
+            value={name}
+            type={inputType} 
+            placeholder='Your Name'
+            name='full_name'
+        /> :
+
+     <input 
+        className='form-control'
         onChange={handleChange}
         value={name}
         type={inputType} 
@@ -39,6 +54,9 @@ const App = props => {
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
         <SurveyInput />
+
+
+        <SurveyInput type='textarea' />
 
         <SurveyInput type='number' />
 

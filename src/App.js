@@ -27,25 +27,23 @@ const SurveyInput = props => {
     }
 
     const inputType = verifyInputType(props.type)
-    
+    const inputProps = {
+        className: 'form-control',
+        onChange: handleChange,
+        value: name,
+        type: inputType,
+        placeholder: props.placeholder ? props.placeholder : 'Your text...',
+        name: props.name ? props.name : `${inputType}_${props.key}`
+    }
     return inputType === 'textarea' ? 
 
         <textarea  
-            className='form-control'
-            onChange={handleChange}
-            value={name}
-            type={inputType} 
-            placeholder='Your Name'
-            name='full_name'
+            {...inputProps}
         /> :
 
      <input 
-        className='form-control'
-        onChange={handleChange}
-        value={name}
-        type={inputType} 
-        placeholder='Your Name'
-        name='full_name' />
+        {...inputProps}
+        />
 }
 
 
@@ -53,15 +51,15 @@ const SurveyInput = props => {
 const App = props => {
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
-        <SurveyInput />
+        <SurveyInput placeholder='My Placeholder' name='first_name' />
 
 
-        <SurveyInput type='textarea' />
+        <SurveyInput type='textarea' placeholder='My Placeholder' name='first_name'  />
 
-        <SurveyInput type='number' />
+        <SurveyInput type='number' placeholder='My Placeholder' name='first_name'  />
 
 
-        <SurveyInput type='email' />
+        <SurveyInput type='email' placeholder='My Placeholder' name='first_name'  />
     </div>
 }
 

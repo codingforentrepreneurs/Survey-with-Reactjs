@@ -19,10 +19,14 @@ function verifyInputType (inputType) {
     return type
 }
 
-const useInputChange = customValue => {
+const useInputChange = (customValue, callback) => {
     const [value, setValue] = useState(customValue ? customValue : '')
     const handleChange = event => {
-        setValue(event.target.value)
+        const newValue = event.target.value
+        setValue(newValue)
+        if (callback) {
+            callback(event.target.name, newValue)
+        }
     }
     return {
         value: value,
@@ -32,7 +36,7 @@ const useInputChange = customValue => {
 
 
 const SurveyInput = props => {
-    const {value, handleChange} = useInputChange(props.defaultValue)
+    const {value, handleChange} = useInputChange(props.defaultValue, props.triggerCallback)
     const inputType = verifyInputType(props.type)
     const inputProps = {
         className: 'form-control',
@@ -75,11 +79,12 @@ const myInputs = [
 
 
 const App = props => {
+    const [inlineData, setInlineData] = useState({})
     const handleSubmit = (event) => {
         event.preventDefault()
         event.persist()
         
-
+        console.log(inlineData)
         // XMLHttpRequest()
         let formData = new FormData()
         for (let formInput of event.target.elements){
@@ -88,6 +93,13 @@ const App = props => {
                 formData.append(formInput.name, formInput.value)
             }   
         }
+    }
+
+    const callback = (name, value) => {
+        console.log('callback', name, value)
+        inlineData[name] = value
+        setInlineData(inlineData)
+        
     }
     return <div className='col-10 mx-auto text-center'>
         <h1>Hello There</h1>
@@ -98,6 +110,7 @@ const App = props => {
 
                 return <SurveyInput 
                     type={obj.type}
+                    triggerCallback={callback}
                     placeholder={obj.placeholder}
                     defaultValue={obj.defaultValue} 
                     name={obj.name}

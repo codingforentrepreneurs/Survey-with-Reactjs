@@ -55,4 +55,11 @@ React v16.8 with Hooks :)
 
 [27 - Passing Functions through Props](../../tree/5a9de0642958547875ccd3571a4adef2f5f1f1ed/)
 
+[28 - Prepare for Radio and Checkbox](../../tree/9ba06effe173a617ad8111f44cc0d91fac0d67b8/)
+
+[29 - Radio & Checkbox](../../tree/f306be55f216122bae0f1250269aa7326b6af510/)
+
+[30 - Adding CSS Classes](../../tree/aa7d5860af39593c3f05d8eeaa6b26e560b76ce6/)
+
+[31 - Cleaning Form Submit Data](../../tree/189ad726576931aedb48191a53c1e5ea5b5aad76/)
 

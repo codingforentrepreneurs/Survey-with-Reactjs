@@ -41,11 +41,18 @@ React v16.8 with Hooks :)
 
 [20 - Create a Form Input](../../tree/7e36ebd06eb35cf07ed2ed9e03ed41d90e4ab1be/)
 
-[12 - Verify Input Type](../../tree/cd1f2a1164dd9c4d5fed053ec8fd94fb3f81b508/)
+[21 - Verify Input Type](../../tree/cd1f2a1164dd9c4d5fed053ec8fd94fb3f81b508/)
 
 [22 - Its About Consistency](../../tree/98c84c053807f6f5b5b7211e8fb365844dd6d79f/)
 
 [23 - Deconstructing Assignment](../../tree/9318c8a6edace9485043f03fb4dae104637be31b/)
 
 [24 - Custom Hook for Maximum Reusability](../../tree/c2ec82a8b5cb5cc3e6724a1ad86d31bb427abedc/)
+
+[25 - Rending Dynamic Inputs](../../tree/5d0b2193f4e17d9cdfe1699d5548fce15a135241/)
+
+[26 - Extracting the Data from Inputs](../../tree/d1808889d30c84c513ac260188e60775bec03ade/)
+
+[27 - Passing Functions through Props](../../tree/5a9de0642958547875ccd3571a4adef2f5f1f1ed/)
+
 

@@ -35,3 +35,17 @@ React v16.8 with Hooks :)
 
 [17 - Lifecycle Methods in a React Class Component](../../tree/2cf48e5f230015ea078446a23233aa0f39131855/)
 
+[18 - Functional Props vs Class Props](../../tree/935adaae2193b15cb84ae7adb4f7f5a3174abf93/)
+
+[19 - Clean App and Use Bootstrap CSS](../../tree/238b91ca459e867238be446b18b21c5cc284e627/)
+
+[20 - Create a Form Input](../../tree/7e36ebd06eb35cf07ed2ed9e03ed41d90e4ab1be/)
+
+[12 - Verify Input Type](../../tree/cd1f2a1164dd9c4d5fed053ec8fd94fb3f81b508/)
+
+[22 - Its About Consistency](../../tree/98c84c053807f6f5b5b7211e8fb365844dd6d79f/)
+
+[23 - Deconstructing Assignment](../../tree/9318c8a6edace9485043f03fb4dae104637be31b/)
+
+[24 - Custom Hook for Maximum Reusability](../../tree/c2ec82a8b5cb5cc3e6724a1ad86d31bb427abedc/)
+

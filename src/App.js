@@ -37,16 +37,21 @@ const useInputChange = (customValue, callback) => {
 
 const SurveyRadioInput = props => {
     const {object} = props
-    return <div>
+    return <div className={props.className}>
         {object.options.map((data, index)=> {
-            return <div key={`${object.type}-${index}`}>
+            return <div className={`form-check ${props.optionClassName}`}
+
+                    key={`${object.type}-${index}`}>
                     <input 
+                        className='form-check-input'
                         type={object.type} 
                         value={data.value} 
                         name={object.name}
                         id={`${object.name}-${index}`}
                         />
                     <label 
+                        className='form-check-label'
+                        
                         htmlFor={`${object.name}-${index}`}>
                         {data.label}
                         </label>
@@ -61,7 +66,7 @@ const SurveyTextInput = props => {
     const {value, handleChange} = useInputChange(props.defaultValue, props.triggerCallback)
     const inputType = verifyTextInputType(props.type)
     const inputProps = {
-        className: 'form-control',
+        className: props.className ? props.className : 'form-control',
         onChange: handleChange,
         value: value,
         type: inputType,
@@ -135,7 +140,7 @@ const App = props => {
         setInlineData(inlineData)
         
     }
-    return <div className='col-10 mx-auto text-center'>
+    return <div className='col-6 mx-auto text-center'>
         <h1>Hello There</h1>
         
         <form onSubmit={handleSubmit}>
@@ -143,12 +148,15 @@ const App = props => {
 
 
                 return (obj.type === 'radio' || obj.type === 'checkbox') ?
-                    <SurveyRadioInput object={obj} key={`input-${index}`} />
+                        <SurveyRadioInput 
+                            object={obj} 
+                            key={`input-${index}`} />
 
                     :
 
 
                      <SurveyTextInput 
+                     className='mb-3 form-control'
                     type={obj.type}
                     triggerCallback={callback}
                     placeholder={obj.placeholder}

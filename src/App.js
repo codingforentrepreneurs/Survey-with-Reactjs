@@ -36,9 +36,24 @@ const useInputChange = (customValue, callback) => {
 
 
 const SurveyRadioInput = props => {
-
+    const {object} = props
     return <div>
-        
+        {object.options.map((data, index)=> {
+            return <div key={`${object.type}-${index}`}>
+                    <input 
+                        type={object.type} 
+                        value={data.value} 
+                        name={object.name}
+                        id={`${object.name}-${index}`}
+                        />
+                    <label 
+                        htmlFor={`${object.name}-${index}`}>
+                        {data.label}
+                        </label>
+
+            </div>
+        })}
+
     </div>
 }
 
@@ -77,7 +92,7 @@ const myInputs = [
     },
     {
         name: 'mySingleChoice',
-        type: 'radio',
+        type: 'checkbox',
         options: [
             {
                 value: 1,
@@ -127,7 +142,7 @@ const App = props => {
             {myInputs.map((obj, index)=>{
 
 
-                return obj.type === 'radio' ?
+                return (obj.type === 'radio' || obj.type === 'checkbox') ?
                     <SurveyRadioInput object={obj} key={`input-${index}`} />
 
                     :

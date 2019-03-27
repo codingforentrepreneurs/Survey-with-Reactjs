@@ -31,6 +31,24 @@ const useInputChange = (customValue, callback) => {
     }
 }
 
+const SurveySelectInput = props => {
+    const {object} = props
+
+    return <select name={object.name} className={props.className}>
+            <option>Select an option</option>
+        {object.options.map((data, index)=> {
+            return <option 
+                    value={data.value} 
+                        id={`${object.name}-${index}`} 
+                        className={`form-check ${props.optionClassName}`}
+                        key={`${object.type}-${index}`}>
+                        {data.label}
+                    </option>
+        })}
+
+    </select>
+
+}
 
 const SurveyRadioInput = props => {
     const {object} = props
@@ -109,6 +127,24 @@ const myInputs = [
                 label: 'Label 123'
             }
         ]
+    },
+    {
+        name: 'myDropdownChoice',
+        type: 'select',
+        options: [
+            {
+                value: 1,
+                label: 'Label 1'
+            },
+            {
+                value: 'abc',
+                label: 'Label abc'
+            },
+            {
+                value: '123',
+                label: 'Label 123'
+            }
+        ]
     }
 
 ]
@@ -122,10 +158,14 @@ const App = props => {
         // XMLHttpRequest()
         let formData = new FormData()
         for (let formInput of event.target.elements){
-            
 
             const verifyType = verifyTextInputType(formInput.type)
             if (verifyType) {
+                console.log(formInput.name, formInput.value)
+                formData.append(formInput.name, formInput.value)
+            }
+
+            if (formInput.type === 'select-one') {
                 console.log(formInput.name, formInput.value)
                 formData.append(formInput.name, formInput.value)
             }
@@ -153,6 +193,13 @@ const App = props => {
 
                     :
 
+                    (obj.type === 'select') ?
+                        <SurveySelectInput 
+                            className='form-control mb-3'
+                            object={obj} 
+                            key={`input-${index}`} />
+
+                    :
 
                      <SurveyTextInput 
                      className='mb-3 form-control'

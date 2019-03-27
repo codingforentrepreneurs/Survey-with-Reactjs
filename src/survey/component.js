@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 
 import {
@@ -16,6 +16,23 @@ export const Survey = (props) => {
     const [page, setPage] = useState(1)
     const [isFinalPage, setIsFinalPage] = useState(false)
     const [surveyValues, setSurveyValues] = useState({})
+    const [loadedInputs, setLoadedInputs] = useState([])
+
+    const {surveyId} = props
+
+    useEffect(()=>{
+        if (surveyId){
+            // check it's a file
+            const inputDataFile = import(`../data/survey_${surveyId}.json`)
+            // http request
+            inputDataFile.then(response=>{
+                setLoadedInputs(response.default)
+                // set the new inputs list data
+            })
+
+        }
+
+    })
 
     const triggerBackendUpdate = () => {
         console.log(surveyValues)
@@ -51,7 +68,7 @@ export const Survey = (props) => {
         }
         setSurveyValues(surveyValues)
         const nextPage = page + 1
-        const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === nextPage) : []
+        const inputs = loadedInputs ? loadedInputs.filter(inputOption => inputOption.page === nextPage) : []
        
 
         if (isFinalPage) {
@@ -66,7 +83,7 @@ export const Survey = (props) => {
 
 
     }
-    const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === page) : []
+    const inputs = loadedInputs ? loadedInputs.filter(inputOption => inputOption.page === page) : []
     return <form onSubmit={handleSubmit}>
             {isFinalPage !== true && inputs.map((obj, index)=>{
 

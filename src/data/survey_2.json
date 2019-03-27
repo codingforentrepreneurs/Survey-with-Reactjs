@@ -1,0 +1,16 @@
+[
+    {
+        "page": 1,
+        "required": true,
+        "name": "full_name",
+        "type": "text",
+        "placeholder": "You full name..."
+    },
+    {
+        "page": 1,
+        "required": true,
+        "name": "email",
+        "type": "email",
+        "placeholder": "hello@teamcfe.com"
+    }
+]

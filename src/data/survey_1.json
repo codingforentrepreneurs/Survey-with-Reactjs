@@ -1,0 +1,81 @@
+[
+    {
+        "page": 1,
+        "required": true,
+        "name": "full_name",
+        "type": "text",
+        "placeholder": "You full name..."
+    },
+    {
+        "page": 2,
+        "required": true,
+        "name": "email",
+        "type": "email",
+        "placeholder": "hello@teamcfe.com"
+    },
+    {
+        "page": 3,
+        "required": true,
+        "name": "message",
+        "type": "textarea",
+        "placeholder": "Your Message"
+    },
+    {
+         "page": 4,
+        "name": "mySingleChoice",
+        "type": "checkbox",
+        "options": [
+            {
+                "value": 1,
+                "label": "label 1"
+            },
+            {
+                "value": "abc",
+                "label": "label abc"
+            },
+            {
+                "value": "123",
+                "label": "label 123"
+            }
+        ]
+    },
+    {
+         "page": 4,
+        "name": "myDropdownChoice",
+        "type": "select",
+        "options": [
+            {
+                "value": 1,
+                "label": "label 1"
+            },
+            {
+                "value": "abc",
+                "label": "label abc"
+            },
+            {
+                "value": "123",
+                "label": "label 123"
+            }
+        ]
+    },
+    {
+         "page": 5,
+        "name": "myMultiSelect",
+        "type": "select",
+        "multiple": true,
+        "options": [
+            {
+                "value": 1,
+                "label": "label 1"
+            },
+            {
+                "value": "abc",
+                "label": "label abc"
+            },
+            {
+                "value": "123",
+                "label": "label 123"
+            }
+        ]
+    }
+]

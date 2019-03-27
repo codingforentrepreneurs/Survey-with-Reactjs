@@ -75,3 +75,9 @@ React v16.8 with Hooks :)
 
 [37 - Chunk Survey into Pieces](../../tree/1d1de5777f7db961ad8d3e4851ae6ae4be49eb2a/)
 
+[38 - Load Dynamically from JSON](../../tree/1a042d607660efc1e1b4ceb445057dc71e5033fb/)
+
+[39 - Fade In Elements with Animate css](../../tree/839abee3a75e37735edaeceedb37c824682b9c27/)
+
+[40 - Overview Example](../../tree/dcbc6dd11630b79eccb6892f7383b464dbc8ff28/)
+

@@ -1,99 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 
-function verifyTextInputType (inputType) {
-    switch (inputType) {
-        case 'text':
-            return true
-        case 'email':
-            return true
-        case 'number':
-            return true
-        case 'textarea':
-            return true
-        default:
-            return false
-    }
-}
+import {
+    Survey,
+} from './survey'
 
-const useInputChange = (customValue, callback) => {
-    const [value, setValue] = useState(customValue ? customValue : '')
-    const handleChange = event => {
-        const newValue = event.target.value
-        setValue(newValue)
-        if (callback) {
-            callback(event.target.name, newValue)
-        }
-    }
-    return {
-        value: value,
-        handleChange: handleChange
-    }
-}
 
-const SurveySelectInput = props => {
-    const {object} = props
-
-    return <select name={object.name} className={props.className} multiple={object.multiple}>
-            <option hidden value>Select an option</option>
-        {object.options.map((data, index)=> {
-            return <option 
-                    value={data.value} 
-                        id={`${object.name}-${index}`} 
-                        className={`form-check ${props.optionClassName}`}
-                        key={`${object.type}-${index}`}>
-                        {data.label}
-                    </option>
-        })}
-
-    </select>
-
-}
-
-const SurveyRadioInput = props => {
-    const {object} = props
-    return <div className={props.className}>
-        {object.options.map((data, index)=> {
-            return <div className={`form-check ${props.optionClassName}`}
-
-                    key={`${object.type}-${index}`}>
-                    <input 
-                        className='form-check-input'
-                        type={object.type} 
-                        required={props.required}
-                        value={data.value} 
-                        name={object.name}
-                        id={`${object.name}-${index}`}
-                        />
-                    <label 
-                        className='form-check-label'
-                        
-                        htmlFor={`${object.name}-${index}`}>
-                        {data.label}
-                        </label>
-
-            </div>
-        })}
-
-    </div>
-}
-
-const SurveyTextInput = props => {
-    const {value, handleChange} = useInputChange(props.defaultValue, props.triggerCallback)
-    const inputType = verifyTextInputType(props.type) ? props.type : 'text'
-    const inputProps = {
-        className: props.className ? props.className : 'form-control',
-        onChange: handleChange,
-        required: props.required,
-        value: value,
-        type: inputType,
-        placeholder: props.placeholder ? props.placeholder : 'Your text...',
-        name: props.name ? props.name : `${inputType}_${props.key}`
-    }
-    return inputType === 'textarea' ? 
-    <textarea {...inputProps} /> :
-     <input {...inputProps} />
-}
 
 
 const myInputs = [
@@ -105,8 +17,8 @@ const myInputs = [
         placeholder: "You full name..."
     },
     {
-         page: 2,
-          required: true,
+        page: 2,
+        required: true,
         name: 'email',
         type: 'email',
         placeholder: "hello@teamcfe.com"
@@ -180,114 +92,13 @@ const myInputs = [
 ]
 
 
-const Survey = (props) => {
-    const [page, setPage] = useState(1)
-    const [isFinalPage, setIsFinalPage] = useState(false)
-    const [surveyValues, setSurveyValues] = useState({})
 
-    const triggerBackendUpdate = () => {
-        console.log(surveyValues)
-
-        // assume backend updated
-        setPage(1)
-        setSurveyValues({})
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        event.persist()
-        for (let formInput of event.target.elements){
-            const verifyType = verifyTextInputType(formInput.type)
-            if (verifyType) {
-                surveyValues[formInput.name] = formInput.value
-            }
-
-            if (formInput.type === 'select-one') {
-                surveyValues[formInput.name] = formInput.value
-            }
-
-            if (formInput.type === 'select-multiple') {
-                const selected = [].filter.call(formInput.options, option=>option.selected)
-                const values = selected.map(option => option.value)
-                surveyValues[formInput.name] = values
-            }
-
-            if (formInput.checked) {
-                surveyValues[formInput.name] = formInput.value
-            }
-
-        }
-        setSurveyValues(surveyValues)
-        const nextPage = page + 1
-        const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === nextPage) : []
-       
-
-        if (isFinalPage) {
-            triggerBackendUpdate()
-        } else {
-            if (inputs.length === 0) {
-                setIsFinalPage(true)
-            } else {
-                setPage(nextPage)
-            }
-        }
-
-
-    }
-    const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === page) : []
-    return <form onSubmit={handleSubmit}>
-            {isFinalPage !== true && inputs.map((obj, index)=>{
-
-                const inputKey = `input-${index}-${page}`
-                return (obj.type === 'radio' || obj.type === 'checkbox') ?
-                        <SurveyRadioInput 
-                            object={obj} 
-                            key={inputKey} 
-
-                             {...obj}
-                            />
-
-                    :
-
-                    (obj.type === 'select') ?
-                        <SurveySelectInput 
-                            className='form-control mb-3'
-                            object={obj} 
-                            key={inputKey} 
-                             {...obj}
-                            />
-
-                    :
-
-                     <SurveyTextInput 
-                     className='mb-3 form-control'
-                    key={inputKey}
-                        {...obj}
-                     />
-                   
-                   
-
-                })
-
-            }
-            
-           
-
-
-             <button 
-                    name='save_btn'
-                    type='submit' 
-                    className='btn btn-primary my-5'>Save</button>
-        </form>
-}
 
 const App = props => {
 
     return <div className='col-6 mx-auto text-center'>
         <h1>Hello There</h1>
-        
         <Survey inputs={myInputs} />
-        
     </div>
 }
 

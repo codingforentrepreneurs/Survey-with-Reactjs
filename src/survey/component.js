@@ -36,10 +36,11 @@ export const Survey = (props) => {
 
     const triggerBackendUpdate = () => {
         console.log(surveyValues)
-
+        alert("Thank you")
         // assume backend updated
         setPage(1)
         setSurveyValues({})
+        setIsFinalPage(false)
     }
 
     const handleSubmit = (event) => {
@@ -86,21 +87,22 @@ export const Survey = (props) => {
     const inputs = loadedInputs ? loadedInputs.filter(inputOption => inputOption.page === page) : []
     return <form onSubmit={handleSubmit}>
             {isFinalPage !== true && inputs.map((obj, index)=>{
-
+                const className = 'form-control mb-2 animated fadeIn'
                 const inputKey = `input-${index}-${page}`
                 return (obj.type === 'radio' || obj.type === 'checkbox') ?
                         <SurveyRadioInput 
                             object={obj} 
                             key={inputKey} 
-
+                            className={className}
                              {...obj}
+                            
                             />
 
                     :
 
                     (obj.type === 'select') ?
                         <SurveySelectInput 
-                            className='form-control mb-3'
+                            className={className}
                             object={obj} 
                             key={inputKey} 
                              {...obj}
@@ -109,7 +111,7 @@ export const Survey = (props) => {
                     :
 
                      <SurveyTextInput 
-                     className='mb-3 form-control'
+                    className={className}
                     key={inputKey}
                         {...obj}
                      />
@@ -120,12 +122,12 @@ export const Survey = (props) => {
 
             }
             
-           
-
-
+              {isFinalPage === true && 
+                   <p>Are you finished?</p>
+              }
              <button 
                     name='save_btn'
                     type='submit' 
-                    className='btn btn-primary my-5'>Save</button>
+                    className='btn btn-primary my-5 animated fadeIn delay-2s'>{isFinalPage === true ? "Save" : "Continue"}</button>
         </form>
 }

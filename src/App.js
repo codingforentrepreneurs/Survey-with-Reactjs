@@ -60,6 +60,7 @@ const SurveyRadioInput = props => {
                     <input 
                         className='form-check-input'
                         type={object.type} 
+                        required={props.required}
                         value={data.value} 
                         name={object.name}
                         id={`${object.name}-${index}`}
@@ -83,6 +84,7 @@ const SurveyTextInput = props => {
     const inputProps = {
         className: props.className ? props.className : 'form-control',
         onChange: handleChange,
+        required: props.required,
         value: value,
         type: inputType,
         placeholder: props.placeholder ? props.placeholder : 'Your text...',
@@ -97,18 +99,21 @@ const SurveyTextInput = props => {
 const myInputs = [
     {
         page: 1,
+        required: true,
         name: 'full_name',
         type: 'text',
         placeholder: "You full name..."
     },
     {
          page: 2,
+          required: true,
         name: 'email',
         type: 'email',
         placeholder: "hello@teamcfe.com"
     },
     {
-         page: 3,
+        page: 3,
+        required: true,
         name: 'message',
         type: 'textarea',
         placeholder: "Your Message"
@@ -237,7 +242,10 @@ const Survey = (props) => {
                 return (obj.type === 'radio' || obj.type === 'checkbox') ?
                         <SurveyRadioInput 
                             object={obj} 
-                            key={inputKey} />
+                            key={inputKey} 
+
+                             {...obj}
+                            />
 
                     :
 
@@ -245,18 +253,18 @@ const Survey = (props) => {
                         <SurveySelectInput 
                             className='form-control mb-3'
                             object={obj} 
-                            key={inputKey} />
+                            key={inputKey} 
+                             {...obj}
+                            />
 
                     :
 
                      <SurveyTextInput 
                      className='mb-3 form-control'
-                    type={obj.type}
-                    placeholder={obj.placeholder}
-                    defaultValue={obj.defaultValue} 
-                    name={obj.name}
                     key={inputKey}
+                        {...obj}
                      />
+                   
                    
 
                 })

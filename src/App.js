@@ -96,21 +96,25 @@ const SurveyTextInput = props => {
 
 const myInputs = [
     {
+        page: 1,
         name: 'full_name',
         type: 'text',
         placeholder: "You full name..."
     },
     {
+         page: 2,
         name: 'email',
         type: 'email',
         placeholder: "hello@teamcfe.com"
     },
     {
+         page: 3,
         name: 'message',
         type: 'textarea',
         placeholder: "Your Message"
     },
     {
+         page: 4,
         name: 'mySingleChoice',
         type: 'checkbox',
         options: [
@@ -129,6 +133,7 @@ const myInputs = [
         ]
     },
     {
+         page: 4,
         name: 'myDropdownChoice',
         type: 'select',
         options: [
@@ -147,6 +152,7 @@ const myInputs = [
         ]
     },
     {
+         page: 5,
         name: 'myMultiSelect',
         type: 'select',
         multiple: true,
@@ -169,8 +175,9 @@ const myInputs = [
 ]
 
 
-const App = props => {
-
+const Survey = (props) => {
+    const [page, setPage] = useState(1)
+    const [isFinalPage, setIsFinalPage] = useState(false)
     const handleSubmit = (event) => {
         event.preventDefault()
         event.persist()
@@ -204,17 +211,27 @@ const App = props => {
         }
     }
 
-    return <div className='col-6 mx-auto text-center'>
-        <h1>Hello There</h1>
-        
-        <form onSubmit={handleSubmit}>
-            {myInputs.map((obj, index)=>{
+    const onClickNextPage = (event) => {
+        event.preventDefault()
+        const nextPage = page + 1
+        const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === nextPage) : []
+        if (inputs.length === 0) {
+            setIsFinalPage(true)
+        } else {
+            setPage(nextPage)
+        }
+       
+    }
 
+    const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === page) : []
+    return <form onSubmit={handleSubmit}>
+            {isFinalPage !== true && inputs.map((obj, index)=>{
 
+                const inputKey = `input-${index}-${page}`
                 return (obj.type === 'radio' || obj.type === 'checkbox') ?
                         <SurveyRadioInput 
                             object={obj} 
-                            key={`input-${index}`} />
+                            key={inputKey} />
 
                     :
 
@@ -222,7 +239,7 @@ const App = props => {
                         <SurveySelectInput 
                             className='form-control mb-3'
                             object={obj} 
-                            key={`input-${index}`} />
+                            key={inputKey} />
 
                     :
 
@@ -232,18 +249,37 @@ const App = props => {
                     placeholder={obj.placeholder}
                     defaultValue={obj.defaultValue} 
                     name={obj.name}
-                    key={`input-${index}`}
+                    key={inputKey}
                      />
                    
 
                 })
 
             }
-            <button 
+            
+           
+
+
+            {isFinalPage !== true ? <button 
                     name='save_btn'
-                    type='input' 
+                    onClick={onClickNextPage}
+                    className='btn btn-warning my-5'>Continue</button> :
+
+                     <button 
+                    name='save_btn'
+                    type='submit' 
                     className='btn btn-primary my-5'>Save</button>
+
+                }
         </form>
+}
+
+const App = props => {
+
+    return <div className='col-6 mx-auto text-center'>
+        <h1>Hello There</h1>
+        
+        <Survey inputs={myInputs} />
         
     </div>
 }

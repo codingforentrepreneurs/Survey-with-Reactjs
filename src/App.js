@@ -34,8 +34,8 @@ const useInputChange = (customValue, callback) => {
 const SurveySelectInput = props => {
     const {object} = props
 
-    return <select name={object.name} className={props.className}>
-            <option>Select an option</option>
+    return <select name={object.name} className={props.className} multiple={object.multiple}>
+            <option hidden value>Select an option</option>
         {object.options.map((data, index)=> {
             return <option 
                     value={data.value} 
@@ -145,6 +145,25 @@ const myInputs = [
                 label: 'Label 123'
             }
         ]
+    },
+    {
+        name: 'myMultiSelect',
+        type: 'select',
+        multiple: true,
+        options: [
+            {
+                value: 1,
+                label: 'Label 1'
+            },
+            {
+                value: 'abc',
+                label: 'Label abc'
+            },
+            {
+                value: '123',
+                label: 'Label 123'
+            }
+        ]
     }
 
 ]
@@ -167,7 +186,13 @@ const App = props => {
 
             if (formInput.type === 'select-one') {
                 console.log(formInput.name, formInput.value)
-                formData.append(formInput.name, formInput.value)
+                formData.append(formInput.name, formInput.value) // string
+            }
+
+            if (formInput.type === 'select-multiple') {
+                const selected = [].filter.call(formInput.options, option=>option.selected)
+                const values = selected.map(option => option.value)
+                formData.append(formInput.name, values) // array
             }
 
             if (formInput.checked) {

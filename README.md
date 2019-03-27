@@ -63,3 +63,15 @@ React v16.8 with Hooks :)
 
 [31 - Cleaning Form Submit Data](../../tree/189ad726576931aedb48191a53c1e5ea5b5aad76/)
 
+[32 - Select Dropdown](../../tree/389cacfd5893eca61d1400a9bcc1904b173da0c6/)
+
+[33 - Select Multiple](../../tree/3fd4f923e41a9fe22df76b6c3ec9c76fcdf43611/)
+
+[34 - A Multi Page Survey](../../tree/14c1242f57097311cac69625712dddedfa0a40f1/)
+
+[35 - Form Data to State](../../tree/d637f50169ea3ae86044c0267871cc127c98d711/)
+
+[26 - Required Fields](../../tree/263e6e5c09d16624810e78717c238a5c24795331/)
+
+[37 - Chunk Survey into Pieces](../../tree/1d1de5777f7db961ad8d3e4851ae6ae4be49eb2a/)
+

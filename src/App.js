@@ -178,51 +178,57 @@ const myInputs = [
 const Survey = (props) => {
     const [page, setPage] = useState(1)
     const [isFinalPage, setIsFinalPage] = useState(false)
+    const [surveyValues, setSurveyValues] = useState({})
+
+    const triggerBackendUpdate = () => {
+        console.log(surveyValues)
+
+        // assume backend updated
+        setPage(1)
+        setSurveyValues({})
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         event.persist()
-        // XMLHttpRequest()
-        let formData = new FormData()
         for (let formInput of event.target.elements){
-
             const verifyType = verifyTextInputType(formInput.type)
             if (verifyType) {
-                console.log(formInput.name, formInput.value)
-                formData.append(formInput.name, formInput.value)
+                surveyValues[formInput.name] = formInput.value
             }
 
             if (formInput.type === 'select-one') {
-                console.log(formInput.name, formInput.value)
-                formData.append(formInput.name, formInput.value) // string
+                surveyValues[formInput.name] = formInput.value
             }
 
             if (formInput.type === 'select-multiple') {
                 const selected = [].filter.call(formInput.options, option=>option.selected)
                 const values = selected.map(option => option.value)
-                formData.append(formInput.name, values) // array
+                surveyValues[formInput.name] = values
             }
 
             if (formInput.checked) {
-                console.log(formInput.name, formInput.value)
-                formData.append(formInput.name, formInput.value)
+                surveyValues[formInput.name] = formInput.value
             }
 
-
         }
-    }
-
-    const onClickNextPage = (event) => {
-        event.preventDefault()
+        setSurveyValues(surveyValues)
         const nextPage = page + 1
         const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === nextPage) : []
-        if (inputs.length === 0) {
-            setIsFinalPage(true)
-        } else {
-            setPage(nextPage)
-        }
        
-    }
 
+        if (isFinalPage) {
+            triggerBackendUpdate()
+        } else {
+            if (inputs.length === 0) {
+                setIsFinalPage(true)
+            } else {
+                setPage(nextPage)
+            }
+        }
+
+
+    }
     const inputs = props.inputs ? props.inputs.filter(inputOption => inputOption.page === page) : []
     return <form onSubmit={handleSubmit}>
             {isFinalPage !== true && inputs.map((obj, index)=>{
@@ -260,17 +266,10 @@ const Survey = (props) => {
            
 
 
-            {isFinalPage !== true ? <button 
-                    name='save_btn'
-                    onClick={onClickNextPage}
-                    className='btn btn-warning my-5'>Continue</button> :
-
-                     <button 
+             <button 
                     name='save_btn'
                     type='submit' 
                     className='btn btn-primary my-5'>Save</button>
-
-                }
         </form>
 }
 
